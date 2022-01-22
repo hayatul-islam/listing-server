@@ -7,14 +7,14 @@ const path = require("path");
 const listingHandler = require('./routerHandler/listingHander')
 const categoryHandler = require('./routerHandler/categoryHandler')
 
-const PORT = process.env.PORT || 4040;
+const port = process.env.PORT || 4040;
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 dotenv.config();
 
-const uri = process.env.MONGODB_URI;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.r9gms.mongodb.net/listing?retryWrites=true&w=majority`;
 mongoose.connect(uri,
     { useNewUrlParser: true })
     .then(() => {
@@ -54,8 +54,8 @@ function errorHandler(err, req, res, next) {
     res.status(500).json({ error: err });
 }
 
-app.listen(PORT, () => {
-    console.log(`Server is running on PORT ${PORT}`)
+app.listen(port, () => {
+    console.log(`Server is running on PORT ${port}`)
 })
 
 app.get("/", (req, res) => {
