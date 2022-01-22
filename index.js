@@ -12,7 +12,6 @@ const PORT = process.env.PORT || 4040;
 const app = express();
 app.use(express.json());
 app.use(cors());
-
 dotenv.config();
 
 const uri = process.env.MONGODB_URI;
@@ -20,11 +19,15 @@ mongoose.connect(uri,
     { useNewUrlParser: true })
     .then(() => {
         console.log('Database Connected')
-
     })
     .catch(e => {
         return console.log(e)
     })
+
+app.use("/listing", listingHandler);
+app.use("/category", categoryHandler);
+
+
 
 // image upload
 app.use("/images", express.static(path.join(__dirname, "public/images")));
@@ -45,8 +48,6 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
     }
 });
 
-app.use("/listing", listingHandler);
-app.use("/category", categoryHandler);
 
 function errorHandler(err, req, res, next) {
     if (res.headersSent) {
