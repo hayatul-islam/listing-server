@@ -45,10 +45,6 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
     }
 });
 
-app.get("/", (req, res) => {
-    res.send("Hello World")
-})
-
 app.use("/listing", listingHandler);
 app.use("/category", categoryHandler);
 
@@ -61,6 +57,10 @@ function errorHandler(err, req, res, next) {
 
 app.listen(PORT, () => {
     console.log(`Server is running on PORT ${PORT}`)
+})
+
+app.get("/", (req, res) => {
+    res.send("Hello World")
 })
 
 
