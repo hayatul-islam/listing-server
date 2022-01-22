@@ -27,8 +27,6 @@ mongoose.connect(uri,
 app.use("/listing", listingHandler);
 app.use("/category", categoryHandler);
 
-
-
 // image upload
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 const storage = multer.diskStorage({
