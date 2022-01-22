@@ -20,9 +20,7 @@ mongoose.connect(uri,
     { useNewUrlParser: true })
     .then(() => {
         console.log('Database Connected')
-        app.listen(PORT, () => {
-            console.log(`Server is running on PORT ${PORT}`)
-        })
+
     })
     .catch(e => {
         return console.log(e)
@@ -61,6 +59,8 @@ function errorHandler(err, req, res, next) {
     res.status(500).json({ error: err });
 }
 
-
+app.listen(PORT, () => {
+    console.log(`Server is running on PORT ${PORT}`)
+})
 
 
